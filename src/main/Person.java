@@ -1,8 +1,10 @@
 package main;
 
+import java.util.ArrayList;
+
 /**
  *
- * @author manas
+ * @author Zeyu
  */
 
 class Person {
@@ -11,14 +13,17 @@ class Person {
     boolean[] condition;
 
     // Constructor
-    public Person(int age, int weight, String name, String gender, boolean[] condition) {
-        this.age = age;
-        this.weight = weight;
-        this.name = name;
-        this.gender = gender;
-        this.condition = condition;
+    public Person(ArrayList personList) {
+        name = personList.get(0);
+        age = personList.get(1);
+        gender = personList.get(2);
+        weight = personList.get(3);
+        condition = personList.get(4);
 
-        /* Having a string with the name of the condition so we can use contains() in the food method later*/
+        /*
+         * Having a string with the name of the condition so we can use contains() in
+         * the food method later
+         */
         conditionName = "";
         for (int i = 0; i < condition.length; i++) {
             if (condition[i]) {
@@ -34,7 +39,7 @@ class Person {
                     case 2:
                         conditionName += "Diabete_T1 ";
                         break;
-                    
+
                     case 3:
                         conditionName += "Diabete_T2 ";
                         break;
@@ -47,7 +52,7 @@ class Person {
     public boolean isGoodCalorie(int calorieAmount) {
         if (conditionName.contains("Diabete_T1")) {
             return calorieAmount <= (16 * KgToPound(weight)) / 3;
-        } else if (conditionName.contains("Diabete_T2")){
+        } else if (conditionName.contains("Diabete_T2")) {
             return calorieAmount <= 1800 / 3;
         } else if (conditionName.contains("Obesity")) {
             return calorieAmount <= 22 * weight;
@@ -81,8 +86,8 @@ class Person {
     }
 
     public static void main(String[] args) {
-        boolean[] b = {false, true, true};
-        Person p = new Person(5, 57, "smthng", b);
+        boolean[] b = { false, true, true };
+        Person p = new Person(5, 57, "M","smthng", b);
         System.out.println(p.getConditionName());
         System.out.println(p.isGoodSodium(501));
     }
