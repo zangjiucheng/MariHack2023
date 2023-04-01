@@ -5,7 +5,7 @@ import java.awt.*;
 import main.Main;
 
 public class MyPanel extends JPanel {
-    Image logo = new ImageIcon("NutriScan Logo.png").getImage();
+    Image logo = new ImageIcon("src/Resources/GitHealthy.png").getImage();
 
     MyPanel() {
         this.setPreferredSize(Main.FULLSCREEN);

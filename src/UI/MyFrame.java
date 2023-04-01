@@ -1,11 +1,13 @@
 package UI;
 
 import javax.swing.*;
+
+import main.Main;
+import main.Person;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import main.*;
 
 public class MyFrame extends JFrame {
 
@@ -21,14 +23,12 @@ public class MyFrame extends JFrame {
     JTextField fNameTF = new JTextField();
     JTextField lNameTF = new JTextField();
     JTextField ageTF = new JTextField();
-    // String s1[] = { "", "Diabetes type 2", "Obesity", "Staying Healthy" };
+    String s1[] = { "", "Staying Healthy", "Obesity", "Diabetes T1", "Diabetes T2" };
     String s2[] = { "", "M", "F" };
     // JComboBox conditionCB = new JComboBox(s1);
     JRadioButton button1 = new JRadioButton("Diabetes type 2");
     JRadioButton button2 = new JRadioButton("Obesity");
     JRadioButton button3 = new JRadioButton("Staying Healthy");
-
-    // condition
 
     JComboBox genderCB = new JComboBox(s2);
     JLabel weightLabel = new JLabel("Weight (kg)");
@@ -39,7 +39,9 @@ public class MyFrame extends JFrame {
     public static int age = 0;
     public static String gender = "";
     public static int weight = 0;
-    public static boolean[] condition = new boolean[3];
+    public static boolean[] condition = new boolean[4];
+    boolean error = true;
+    boolean error2 = true;
 
     public MyFrame() {
 
@@ -65,7 +67,7 @@ public class MyFrame extends JFrame {
         weightLabel.setBounds(400, 345, 200, 50);
 
         confirmBtn.setFont(arial);
-        confirmBtn.setBounds(400, 530, 200, 70);
+        confirmBtn.setBounds(400, 510, 200, 50);
 
         fNameTF.setFont(arial);
         fNameTF.setBounds(400, 75, 180, 30);
@@ -96,12 +98,7 @@ public class MyFrame extends JFrame {
         add(fNameTF);
         add(lNameTF);
         add(ageTF);
-
-        // ButtonGroup condition = new ButtonGroup();
-        // condition.add(button1);
-        // condition.add(button2);
-        // condition.add(button3);
-
+        // add(conditionCB);
         add(button1);
         add(button2);
         add(button3);
@@ -115,34 +112,53 @@ public class MyFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if (fNameTF.getText().equals("") && lNameTF.getText().equals("") && ageTF.getText().equals("") &&
-                        genderCB.getSelectedItem().toString() == "" && weightTF.getText().equals("")) {
-
-                    JOptionPane.showMessageDialog(null, "Please enter all the required information");
-
-                } else {
-                    dispose();
-                    name = fNameTF.getText() + " " + lNameTF.getText();
-                    age = Integer.parseInt(ageTF.getText());
-                    weight = Integer.parseInt(weightTF.getText());
-                    gender = genderCB.getSelectedItem().toString();
-
-                    if (button1.isSelected()) {
-                        condition[0] = true;
-                    }
-                    if (button2.isSelected()) {
-                        condition[1] = true;
-                    }
-                    if (button3.isSelected()) {
-                        condition[2] = true;
-                    }
-
-                    Person person = new Person(name, age, gender, weight, condition);
-
-                    System.out.println(person.getName());
-
-                    new MyFrame2();
+                try {
+                    Integer.valueOf(ageTF.getText());
+                    error = false;
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Please enter a number for age");
                 }
+
+                try {
+                    Float.valueOf(weightTF.getText());
+                    error2 = false;
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Please enter a number for weight");
+                }
+
+                if (!error && !error2) {
+
+                    if (fNameTF.getText().equals("") && lNameTF.getText().equals("") && ageTF.getText().equals("") &&
+                            genderCB.getSelectedItem().toString().equals("") && weightTF.getText().equals("")) {
+
+                        JOptionPane.showMessageDialog(null, "Please enter all the required information");
+
+                    } else {
+
+                        dispose();
+                        name = fNameTF.getText() + " " + lNameTF.getText();
+                        age = Integer.parseInt(ageTF.getText());
+                        weight = Integer.parseInt(weightTF.getText());
+                        gender = genderCB.getSelectedItem().toString();
+
+                        if (button1.isSelected()) {
+                            condition[0] = true;
+                        }
+                        if (button2.isSelected()) {
+                            condition[1] = true;
+                        }
+                        if (button3.isSelected()) {
+                            condition[2] = true;
+                        }
+
+                        Person person = new Person(name, age, gender, weight, condition);
+
+                        System.out.println(person.getName());
+
+                        new MyFrame2();
+                    }
+                }
+
             }
         });
 
