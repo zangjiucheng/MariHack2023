@@ -1,9 +1,12 @@
+package UI;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MyPanel extends JPanel {
     Image logo = new ImageIcon("NutriScan Logo.png").getImage();
-    MyPanel(){
+
+    MyPanel() {
         this.setPreferredSize(Main.FULLSCREEN);
         this.setBackground(Color.GRAY);
     }
@@ -11,6 +14,6 @@ public class MyPanel extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(logo,-20,0,400,65*Main.FULLSCREEN.height/100, null);
+        g.drawImage(logo, -20, 0, 400, 65 * Main.FULLSCREEN.height / 100, null);
     }
 }

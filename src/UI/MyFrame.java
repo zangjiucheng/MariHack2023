@@ -1,7 +1,11 @@
+package UI;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import main.*;
 
 public class MyFrame extends JFrame {
 
@@ -17,8 +21,8 @@ public class MyFrame extends JFrame {
     JTextField fNameTF = new JTextField();
     JTextField lNameTF = new JTextField();
     JTextField ageTF = new JTextField();
-    String s1[] = { "","Diabetes type 2", "Obesity", "Staying Healthy"};
-    String s2[] = { "","M", "F"};
+    String s1[] = { "", "Diabetes type 2", "Obesity", "Staying Healthy" };
+    String s2[] = { "", "M", "F" };
     JComboBox conditionCB = new JComboBox(s1);
     JComboBox genderCB = new JComboBox(s2);
     JLabel weightLabel = new JLabel("Weight (kg)");
@@ -31,11 +35,10 @@ public class MyFrame extends JFrame {
     public static float weight = 0;
     public static boolean[] condition = new boolean[3];
 
-
     public MyFrame() {
 
         setTitle("Login");
-        setSize(39*Main.FULLSCREEN.width/100,69*Main.FULLSCREEN.height/100);
+        setSize(39 * Main.FULLSCREEN.width / 100, 69 * Main.FULLSCREEN.height / 100);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -50,11 +53,10 @@ public class MyFrame extends JFrame {
         ageLabel.setBounds(400, 190, 200, 50);
         conditionLabel.setFont(arial);
         conditionLabel.setBounds(400, 415, 200, 50);
-        genderLabel.setBounds(400,270,200,50);
+        genderLabel.setBounds(400, 270, 200, 50);
         genderLabel.setFont(arial);
         weightLabel.setFont(arial);
         weightLabel.setBounds(400, 345, 200, 50);
-
 
         confirmBtn.setFont(arial);
         confirmBtn.setBounds(400, 510, 200, 50);
@@ -64,7 +66,7 @@ public class MyFrame extends JFrame {
         lNameTF.setFont(arial);
         lNameTF.setBounds(400, 160, 180, 30);
         ageTF.setFont(arial);
-        ageTF.setBounds(400,240, 180, 30);
+        ageTF.setBounds(400, 240, 180, 30);
         weightTF.setFont(arial);
         weightTF.setBounds(400, 390, 180, 30);
 
@@ -92,7 +94,6 @@ public class MyFrame extends JFrame {
         add(panel);
         setVisible(true);
 
-
         confirmBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -103,20 +104,22 @@ public class MyFrame extends JFrame {
 
                     JOptionPane.showMessageDialog(null, "Please enter all the required information");
 
-                }else {
+                } else {
                     dispose();
                     name = fNameTF.getText() + " " + lNameTF.getText();
                     age = Integer.parseInt(ageTF.getText());
                     weight = Float.parseFloat(weightTF.getText());
                     gender = genderCB.getSelectedItem().toString();
 
-                    if (conditionCB.getSelectedItem() == s1[1]){
+                    if (conditionCB.getSelectedItem() == s1[1]) {
                         condition[0] = true;
-                    }else if (conditionCB.getSelectedItem() == s1[2]) {
+                    } else if (conditionCB.getSelectedItem() == s1[2]) {
                         condition[1] = true;
-                    }else {
+                    } else {
                         condition[2] = true;
                     }
+
+                    Person person = new Person(age, name, condition);
 
                     new MyFrame2();
                 }

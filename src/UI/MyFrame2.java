@@ -1,6 +1,11 @@
+package UI;
+
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
+
+import main.RunPython;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,12 +32,13 @@ public class MyFrame2 extends JFrame {
     JButton takePicBtn = new JButton("Take a picture");
     JButton selectPicBtn = new JButton("Select a picture");
     JLabel resultLB = new JLabel("Result");
-    String[] titles = {"Calories", "Fat", "Sugar"};
+    String[] titles = { "Calories", "Fat", "Sugar" };
     String[][] data = new String[1][3];
     JTable table = new JTable(data, titles);
     JScrollPane sp = new JScrollPane(table);
     public static String fileName = "";
     Image picture = new ImageIcon("").getImage();
+
     public MyFrame2() {
         setTitle("NutriScan");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -40,10 +46,10 @@ public class MyFrame2 extends JFrame {
         setExtendedState(MAXIMIZED_BOTH);
 
         title.setFont(bold);
-        title.setBounds(0,0,250,50);
+        title.setBounds(0, 0, 250, 50);
         nameLB.setFont(bold2);
-        nameLB.setBounds(20,100, 200, 50);
-        ageLB.setBounds(20,250,200, 50);
+        nameLB.setBounds(20, 100, 200, 50);
+        ageLB.setBounds(20, 250, 200, 50);
         ageLB.setFont(bold2);
         genderLB.setFont(bold2);
         genderLB.setBounds(20, 400, 200, 50);
@@ -56,9 +62,9 @@ public class MyFrame2 extends JFrame {
         resultLB.setVisible(false);
 
         nameLB2.setFont(arial);
-        nameLB2.setBounds(20,150, 200, 50);
+        nameLB2.setBounds(20, 150, 200, 50);
         ageLB2.setFont(arial);
-        ageLB2.setBounds(20,300,200,50);
+        ageLB2.setBounds(20, 300, 200, 50);
         genderLB2.setFont(arial);
         genderLB2.setBounds(20, 450, 200, 50);
         weightLB2.setFont(arial);
@@ -76,8 +82,7 @@ public class MyFrame2 extends JFrame {
         table.setRowHeight(50);
         JTableHeader header = table.getTableHeader();
         header.setFont(bold2);
-        sp.setBounds(250,500, 1200, 500);
-
+        sp.setBounds(250, 500, 1200, 500);
 
         add(title);
         add(nameLB);
@@ -114,18 +119,22 @@ public class MyFrame2 extends JFrame {
                     }
 
                     fileName = chooser.getSelectedFile().getAbsolutePath();
-
+                    try {
+                        RunPython.executive(fileName);
+                    } catch (IOException | InterruptedException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
                 }
 
                 try {
-                    if(!Desktop.isDesktopSupported())
-                    {
+                    if (!Desktop.isDesktopSupported()) {
                         System.out.println("Not supported");
                         return;
                     }
 
                     Desktop desktop = Desktop.getDesktop();
-                    File picture = new File(fileName);
+                    File picture = new File("img.jpg");
                     resultLB.setVisible(true);
                     repaint();
 
@@ -137,11 +146,11 @@ public class MyFrame2 extends JFrame {
     }
 
     public void getConditionText() {
-        if (MyFrame.condition[0]){
+        if (MyFrame.condition[0]) {
             conditionLB2.setText("Diabetes type 2");
-        }else if (MyFrame.condition[1]) {
+        } else if (MyFrame.condition[1]) {
             conditionLB2.setText("Obesity");
-        }else {
+        } else {
             conditionLB2.setText("Staying Healthy");
         }
     }
