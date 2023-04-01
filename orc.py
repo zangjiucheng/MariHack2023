@@ -28,7 +28,8 @@ def get_argus():
 
 def tranform_image(imageDir):
     if imageDir.endswith('.heic') or imageDir.endswith('.HEIC'):
-        system('magick ' + imageDir + ' img.jpg')
+        system('magick ' + imageDir + imageDir.split("/")
+               [-1].split(".")[0] + '.jpg')
     else:
         raise Exception('Image format not supported')
 

@@ -1,8 +1,10 @@
 package UI;
 
 import javax.swing.*;
-import java.awt.*;
+
 import main.Main;
+
+import java.awt.*;
 
 public class MyPanel2 extends JPanel {
     public MyPanel2() {

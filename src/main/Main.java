@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import UI.MyFrame;
+import UI.MyFrame2;
 
 /**
  * 
@@ -26,6 +27,7 @@ public class Main {
         // System.out.println(food);
         // // Toolkit.getDefaultToolkit().getScreenSize();
         new MyFrame();
+        // new MyFrame2();
     }
 
 }

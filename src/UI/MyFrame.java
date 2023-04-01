@@ -151,7 +151,7 @@ public class MyFrame extends JFrame {
                             condition[2] = true;
                         }
 
-                        Person person = new Person(name, age, gender, weight, condition);
+                        person = new Person(name, age, gender, weight, condition);
 
                         System.out.println(person.getName());
 
@@ -163,4 +163,6 @@ public class MyFrame extends JFrame {
         });
 
     }
+
+    static public Person person;
 }

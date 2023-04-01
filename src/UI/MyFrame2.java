@@ -2,13 +2,18 @@ package UI;
 
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableColumnModel;
+
+import main.Food_Attribute;
+import main.JsonParser;
+import main.RunPython;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import UI.MyFrame;
 
 public class MyFrame2 extends JFrame {
 
@@ -37,6 +42,8 @@ public class MyFrame2 extends JFrame {
     public static String fileName = "";
     Image picture = new ImageIcon("").getImage();
     ArrayList personList = new ArrayList();
+    Image bad = new ImageIcon("src/Resources/Bad.png").getImage();
+    Image good = new ImageIcon("src/Resources/Good.png").getImage();
 
     public MyFrame2() {
         setTitle("NutriScan");
@@ -82,6 +89,7 @@ public class MyFrame2 extends JFrame {
         table.setFont(bold);
         table.setRowHeight(50);
         JTableHeader header = table.getTableHeader();
+
         header.setFont(bold2);
         sp.setBounds(250, 500, 1200, 500);
 
@@ -102,7 +110,7 @@ public class MyFrame2 extends JFrame {
         add(takePicBtn);
         add(selectPicBtn);
 
-        add(sp);
+        // add(sp);
 
         add(panel2);
         setVisible(true);
@@ -120,7 +128,12 @@ public class MyFrame2 extends JFrame {
                     }
 
                     fileName = chooser.getSelectedFile().getAbsolutePath();
-
+                    try {
+                        RunPython.executive(fileName);
+                    } catch (IOException | InterruptedException e1) {
+                        // TODO Auto-generated catch block
+                        e1.printStackTrace();
+                    }
                 }
 
                 try {
@@ -129,16 +142,54 @@ public class MyFrame2 extends JFrame {
                         return;
                     }
 
-                    Desktop desktop = Desktop.getDesktop();
-                    File picture = new File(fileName);
+                    // Desktop desktop = Desktop.getDesktop();
+                    // File picture = new File(fileName);
+                    Food_Attribute food = JsonParser.createFoodAttribute();
+                    // Boolean status2 = true;
+                    if (MyFrame.person.isGoodCalorie(food.getCalories())) {
+                        // data[0][0] = "Good";
+                    } else {
+                        // data[0][0] = "Bad";
+                        System.out.println("Bad calorie");
+                        status2 = false;
+                    }
+
+                    if (MyFrame.person.isGoodFat(food.getFat())) {
+                        // data[0][1] = "Good";
+                    } else {
+                        // data[0][1] = "Bad";
+                        System.out.println("Bad fat");
+                        status2 = false;
+                    }
+
+                    if (MyFrame.person.isGoodSodium(food.getSodium())) {
+                        // data[0][2] = "Good";
+                    } else {
+                        // data[0][2] = "Bad";
+                        System.out.println("Bad sodium");
+                        status2 = false;
+                    }
+
+                    if (status2) {
+                        resultLB.setText("Good");
+                    } else {
+                        resultLB.setText("Bad");
+                    }
+
                     resultLB.setVisible(true);
+                    // Thread.sleep(4000);
                     repaint();
+
+                    // dispose();
+                    // paint(getGraphics()).dispose();
+                    // new MyFrame2();
 
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
             }
         });
+
     }
 
     public String getConditionText() {
@@ -164,7 +215,17 @@ public class MyFrame2 extends JFrame {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        picture = new ImageIcon(MyFrame2.fileName).getImage();
+        picture = new ImageIcon(fileName.split(".")[0] + ".jpg").getImage();
         g.drawImage(picture, 457, 0, 600, 500, null);
+        // dispose();
+        // picture = new ImageIcon(MyFrame2.fileName).getImage();
+        // g.drawImage(picture, 457, 0, 600, 500, null);
+        if (status2) {
+            g.drawImage(good, 1338, 100, 60, 60, null);
+        } else {
+            g.drawImage(bad, 1338, 100, 60, 60, null);
+        }
     }
+
+    boolean status2 = true;
 }
