@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MyFrame2 extends JFrame {
 
@@ -33,11 +34,14 @@ public class MyFrame2 extends JFrame {
     JScrollPane sp = new JScrollPane(table);
     public static String fileName = "";
     Image picture = new ImageIcon("").getImage();
+    ArrayList personList = new ArrayList();
     public MyFrame2() {
         setTitle("NutriScan");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setExtendedState(MAXIMIZED_BOTH);
+
+        fillList();
 
         title.setFont(bold);
         title.setBounds(0,0,250,50);
@@ -65,7 +69,7 @@ public class MyFrame2 extends JFrame {
         weightLB2.setBounds(20, 600, 200, 50);
         conditionLB2.setFont(arial);
         conditionLB2.setBounds(20, 750, 200, 50);
-        getConditionText();
+        conditionLB2.setText(getConditionText());
 
         takePicBtn.setFont(bold2);
         takePicBtn.setBounds(250, 0, 200, 100);
@@ -136,14 +140,24 @@ public class MyFrame2 extends JFrame {
         });
     }
 
-    public void getConditionText() {
+    public String getConditionText() {
         if (MyFrame.condition[0]){
-            conditionLB2.setText("Diabetes type 2");
+            return "Staying Healthy";
         }else if (MyFrame.condition[1]) {
-            conditionLB2.setText("Obesity");
+            return "Obesity";
+        }else if (MyFrame.condition[2]) {
+            return "Diabetes T1";
         }else {
-            conditionLB2.setText("Staying Healthy");
+            return "Diabetes T2";
         }
+    }
+
+    public void fillList() {
+        personList.add(MyFrame.name);
+        personList.add(MyFrame.age);
+        personList.add(MyFrame.gender);
+        personList.add(MyFrame.weight);
+        personList.add(getConditionText());
     }
 
     @Override

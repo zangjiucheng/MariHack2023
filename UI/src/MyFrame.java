@@ -17,7 +17,7 @@ public class MyFrame extends JFrame {
     JTextField fNameTF = new JTextField();
     JTextField lNameTF = new JTextField();
     JTextField ageTF = new JTextField();
-    String s1[] = { "","Diabetes type 2", "Obesity", "Staying Healthy"};
+    String s1[] = { "","Staying Healthy", "Obesity", "Diabetes T1", "Diabetes T2"};
     String s2[] = { "","M", "F"};
     JComboBox conditionCB = new JComboBox(s1);
     JComboBox genderCB = new JComboBox(s2);
@@ -29,7 +29,7 @@ public class MyFrame extends JFrame {
     public static int age = 0;
     public static String gender = "";
     public static float weight = 0;
-    public static boolean[] condition = new boolean[3];
+    public static boolean[] condition = new boolean[4];
 
 
     public MyFrame() {
@@ -104,6 +104,7 @@ public class MyFrame extends JFrame {
                     JOptionPane.showMessageDialog(null, "Please enter all the required information");
 
                 }else {
+
                     dispose();
                     name = fNameTF.getText() + " " + lNameTF.getText();
                     age = Integer.parseInt(ageTF.getText());
@@ -114,8 +115,10 @@ public class MyFrame extends JFrame {
                         condition[0] = true;
                     }else if (conditionCB.getSelectedItem() == s1[2]) {
                         condition[1] = true;
-                    }else {
+                    }else if (conditionCB.getSelectedItem() == s1[3]) {
                         condition[2] = true;
+                    }else {
+                        condition[3] = true;
                     }
 
                     new MyFrame2();
