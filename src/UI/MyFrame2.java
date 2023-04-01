@@ -107,7 +107,7 @@ public class MyFrame2 extends JFrame {
         add(weightLB2);
         add(conditionLB2);
 
-        add(takePicBtn);
+        // add(takePicBtn);
         add(selectPicBtn);
 
         // add(sp);
