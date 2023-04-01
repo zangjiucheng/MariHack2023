@@ -1,68 +1,93 @@
-import cv2
+from sys import argv, exit
+from cv2 import imread, cvtColor, COLOR_BGR2RGB
 import pytesseract
-# from PIL import Image
 from re import search
 from json import dumps
 from os import system
 
 
-system('magick IMG_5256.HEIC img.jpg')
+def get_argus():
+    import getopt
+    imageDir = ''
 
-img_cv = cv2.imread(r'img.jpg')
+    try:
+        opts, arg = getopt.getopt(argv[1:], "i:", ["image="])
+    except getopt.GetoptError:
+        print('Error: orc.py -i <img_dir>')
+        print('   or: orc.py --image=<img_dir>')
+        exit(-1)
+    for opt, arg in opts:
+        if opt in ("-i", "--image"):
+            imageDir = arg
+    if imageDir == '':
+        print('Error: orc.py -i <img_dir>')
+        print('   or: orc.py --image=<img_dir>')
+        exit(-1)
+    return imageDir
 
-# By default OpenCV stores images in BGR format and since pytesseract assumes RGB format,
-# we need to convert from BGR to RGB format/mode:
-img_rgb = cv2.cvtColor(img_cv, cv2.COLOR_BGR2RGB)
-readData = pytesseract.image_to_string(img_cv)
 
-calories = fat = sodium = -1
+def tranform_image(imageDir):
+    if imageDir.endswith('.heic') or imageDir.endswith('.HEIC'):
+        system('magick ' + imageDir + ' img.jpg')
+    else:
+        raise Exception('Image format not supported')
 
 
-lineData = readData.splitlines()
-for line in lineData:
-    if 'Calories' in line or 'Calories' in line:
-        calories = int(search(r'\d+', line).group())
-        print(carlories)
-    elif 'Fat' in line or 'Lipides' in line:
-        fat = int(search(r'\d+', line).group())
-        print(fat)
-    elif 'Sodium' in line or 'Sodium' in line:
-        sodium = int(search(r'\d+', line).group())
-        print(sodium)
-    elif 'Sugars' in line or 'Sucres' in line:
-        sugars = int(search(r'\d+', line).group())
-        print(sugars)
+def readImage():
+    img_cv = imread(r'img.jpg')
+    # img_cv = cvtColor(img_cv, COLOR_BGR2RGB)
+    readData = pytesseract.image_to_string(img_cv, lang='eng')
 
-# print(readData)
-# print(readData)
-# # OR
-# # img_rgb = Image.frombytes('RGB', img_cv.shape[:2], img_cv, 'raw', 'BGR', 0, 0)
-# # print(pytesseract.image_to_string(img_rgb))
+    calories = fat = sodium = sugars = -1
 
-# # some JSON:
-# x = '{ "name":"John", "age":30, "city":"New York"}'
+    lineData = readData.splitlines()
+    for line in lineData:
+        if 'Calories' in line or 'Calories' in line:
+            try:
+                calories = int(search(r'\d+', line).group())
+                if (calories < 9):
+                    calories = -1
+            except:
+                pass
 
-# # parse x:
-# y = json.loads(x)
+        elif 'Fat' in line or 'Lipides' in line:
+            try:
+                fat = int(search(r'\d+', line).group())
+            except:
+                pass
 
-# # the result is a Python dictionary:
-# print(y["age"])
+        elif 'Sodium' in line or 'Sodium' in line:
+            try:
+                sodium = int(search(r'\d+', line).group())
+                if (sodium < 5):
+                    sodium = -1
+            except:
+                pass
 
-# a Python object (dict):
-x = {
-    "Calories": calories,
-    "Fat": fat,
-    "Sodium": sodium,
-    "Sugars": sugars
-}
+        elif 'Sugars' in line or 'Sucres' in line:
+            try:
+                sugars = int(search(r'\d+', line).group())
+            except:
+                pass
 
-jsonData = dumps(x)
+    dictFood = {
+        "Calories": calories,
+        "Fat": fat,
+        "Sodium": sodium,
+        "Sugars": sugars
+    }
+    return dictFood
 
-with open('data.json', 'w+') as f:
-    f.write(jsonData)
-    f.close()
-#     # convert into JSON:
-# y = json.dumps(x)
 
-# # the result is a JSON string:
-# print(y)
+def writeJson():
+    jsonData = dumps(readImage())
+
+    with open('data.json', 'w+') as f:
+        f.write(jsonData)
+        f.close()
+
+
+if __name__ == '__main__':
+    imageDir = get_argus()
+    tranform_image(imageDir)
+    writeJson()
