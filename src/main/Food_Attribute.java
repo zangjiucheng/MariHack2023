@@ -61,11 +61,6 @@ public class Food_Attribute {
         this.protein = protein;
     }
 
-    public Food_Attribute calories(int calories) {
-        setCalories(calories);
-        return this;
-    }
-
     public Food_Attribute fat(int fat) {
         setFat(fat);
         return this;
