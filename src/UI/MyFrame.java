@@ -21,9 +21,15 @@ public class MyFrame extends JFrame {
     JTextField fNameTF = new JTextField();
     JTextField lNameTF = new JTextField();
     JTextField ageTF = new JTextField();
-    String s1[] = { "", "Diabetes type 2", "Obesity", "Staying Healthy" };
+    // String s1[] = { "", "Diabetes type 2", "Obesity", "Staying Healthy" };
     String s2[] = { "", "M", "F" };
-    JComboBox conditionCB = new JComboBox(s1);
+    // JComboBox conditionCB = new JComboBox(s1);
+    JRadioButton button1 = new JRadioButton("Diabetes type 2");
+    JRadioButton button2 = new JRadioButton("Obesity");
+    JRadioButton button3 = new JRadioButton("Staying Healthy");
+
+    // condition
+
     JComboBox genderCB = new JComboBox(s2);
     JLabel weightLabel = new JLabel("Weight (kg)");
     JLabel genderLabel = new JLabel("Biological Gender");
@@ -59,7 +65,7 @@ public class MyFrame extends JFrame {
         weightLabel.setBounds(400, 345, 200, 50);
 
         confirmBtn.setFont(arial);
-        confirmBtn.setBounds(400, 510, 200, 50);
+        confirmBtn.setBounds(400, 530, 200, 70);
 
         fNameTF.setFont(arial);
         fNameTF.setBounds(400, 75, 180, 30);
@@ -70,8 +76,11 @@ public class MyFrame extends JFrame {
         weightTF.setFont(arial);
         weightTF.setBounds(400, 390, 180, 30);
 
-        conditionCB.setFont(arial);
-        conditionCB.setBounds(400, 460, 180, 30);
+        // conditionCB.setFont(arial);
+        // conditionCB.setBounds(400, 460, 180, 30);
+        button1.setBounds(400, 460, 180, 18);
+        button2.setBounds(400, 478, 180, 18);
+        button3.setBounds(400, 496, 180, 18);
         genderCB.setFont(arial);
         genderCB.setBounds(400, 320, 180, 30);
 
@@ -87,7 +96,15 @@ public class MyFrame extends JFrame {
         add(fNameTF);
         add(lNameTF);
         add(ageTF);
-        add(conditionCB);
+
+        // ButtonGroup condition = new ButtonGroup();
+        // condition.add(button1);
+        // condition.add(button2);
+        // condition.add(button3);
+
+        add(button1);
+        add(button2);
+        add(button3);
         add(genderCB);
         add(weightTF);
 
@@ -99,8 +116,7 @@ public class MyFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 if (fNameTF.getText().equals("") && lNameTF.getText().equals("") && ageTF.getText().equals("") &&
-                        genderCB.getSelectedItem().toString() == "" && weightTF.getText().equals("") &&
-                        conditionCB.getSelectedItem().toString() == "") {
+                        genderCB.getSelectedItem().toString() == "" && weightTF.getText().equals("")) {
 
                     JOptionPane.showMessageDialog(null, "Please enter all the required information");
 
@@ -111,11 +127,13 @@ public class MyFrame extends JFrame {
                     weight = Integer.parseInt(weightTF.getText());
                     gender = genderCB.getSelectedItem().toString();
 
-                    if (conditionCB.getSelectedItem() == s1[1]) {
+                    if (button1.isSelected()) {
                         condition[0] = true;
-                    } else if (conditionCB.getSelectedItem() == s1[2]) {
+                    }
+                    if (button2.isSelected()) {
                         condition[1] = true;
-                    } else {
+                    }
+                    if (button3.isSelected()) {
                         condition[2] = true;
                     }
 
