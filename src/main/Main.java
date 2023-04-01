@@ -2,9 +2,9 @@ package main;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.File;
 
 import UI.MyFrame;
-import UI.MyFrame2;
 
 /**
  * 
@@ -18,16 +18,10 @@ public class Main {
     public static final Dimension FULLSCREEN = Toolkit.getDefaultToolkit().getScreenSize();
 
     public static void main(String args[]) {
-        // try {
-        // RunPython.executive("src/Datas/IMG_5259.HEIC");
-        // } catch (Exception e) {
-        // System.out.println(e.getMessage());
-        // }
-        // Food_Attribute food = JsonParser.createFoodAttribute();
-        // System.out.println(food);
-        // // Toolkit.getDefaultToolkit().getScreenSize();
+        try {
+            new File("img.jpg").delete();
+        } catch (Exception exception) {
+        }
         new MyFrame();
-        // new MyFrame2();
     }
-
 }

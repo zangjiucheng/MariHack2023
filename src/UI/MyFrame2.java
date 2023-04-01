@@ -1,9 +1,7 @@
 package UI;
 
 import javax.swing.*;
-import javax.swing.table.JTableHeader;
 
-import main.Food_Attribute;
 import main.JsonParser;
 import main.RunPython;
 
@@ -12,8 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import UI.MyFrame;
 
 public class MyFrame2 extends JFrame {
 
@@ -21,7 +17,7 @@ public class MyFrame2 extends JFrame {
     Font arial = new Font("myFont", Font.PLAIN, 20);
     Font bold2 = new Font("myFont", Font.BOLD, 20);
     MyPanel2 panel2 = new MyPanel2();
-    JLabel title = new JLabel("NutriScan");
+    JLabel title = new JLabel("GitHealth");
     JLabel nameLB = new JLabel("Name");
     JLabel ageLB = new JLabel("Age");
     JLabel genderLB = new JLabel("Gender");
@@ -36,24 +32,31 @@ public class MyFrame2 extends JFrame {
     JButton selectPicBtn = new JButton("Select a picture");
     JLabel resultLB = new JLabel("Result");
     JLabel resultLBDetail = new JLabel("");
-    String[] titles = { "Calories", "Fat", "Sugar" };
-    String[][] data = new String[1][3];
+    // String[] titles = { "Calories", "Fat", "Sugar" };
+    String[][] data = { { "0", "0", "0", "0", "0" } };
+    String[] titles = { "Calories", "Fat", "Sugar", "Protein", "Sodium" };
+    // String[] data = {};
     JTable table = new JTable(data, titles);
     JScrollPane sp = new JScrollPane(table);
     public static String fileName = "";
     Image picture = new ImageIcon("").getImage();
-    ArrayList personList = new ArrayList();
     Image bad = new ImageIcon("src/Resources/Bad.png").getImage();
     Image good = new ImageIcon("src/Resources/Good.png").getImage();
+    JLabel picLabel;
 
     public MyFrame2() {
         setTitle("NutriScan");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setExtendedState(MAXIMIZED_BOTH);
-
-        fillList();
-
+        try {
+            picLabel = new JLabel(Utiles.readImage(
+                    "img.jpg",
+                    600, 500, 255));
+            picLabel.setBounds(457, 0, 600, 500);
+            add(picLabel);
+        } catch (Exception e) {
+        }
         title.setFont(bold);
         title.setBounds(0, 0, 250, 50);
         nameLB.setFont(bold2);
@@ -93,9 +96,7 @@ public class MyFrame2 extends JFrame {
 
         table.setFont(bold);
         table.setRowHeight(50);
-        JTableHeader header = table.getTableHeader();
 
-        header.setFont(bold2);
         sp.setBounds(250, 500, 1200, 500);
 
         add(title);
@@ -113,13 +114,19 @@ public class MyFrame2 extends JFrame {
         add(weightLB2);
         add(conditionLB2);
 
-        // add(takePicBtn);
         add(selectPicBtn);
 
-        // add(sp);
+        add(sp);
 
         add(panel2);
         setVisible(true);
+
+        if (UIElements.food != null) {
+            System.out.println("food is not null");
+            information();
+
+            table.repaint();
+        }
 
         selectPicBtn.addActionListener(new ActionListener() {
             @Override
@@ -137,7 +144,6 @@ public class MyFrame2 extends JFrame {
                     try {
                         RunPython.executive(fileName);
                     } catch (IOException | InterruptedException e1) {
-                        // TODO Auto-generated catch block
                         e1.printStackTrace();
                     }
                 }
@@ -148,58 +154,13 @@ public class MyFrame2 extends JFrame {
                         return;
                     }
 
-                    // Desktop desktop = Desktop.getDesktop();
-                    // File picture = new File(fileName);
-                    Food_Attribute food = JsonParser.createFoodAttribute();
-                    System.out.println(food);
+                    UIElements.status2 = true;
+                    UIElements.food = JsonParser.createFoodAttribute();
+                    System.out.println(UIElements.food);
                     System.out.println(MyFrame.person);
-                    // Boolean status2 = true;
-                    String text = "";
-                    if (MyFrame.person.isGoodCalorie(food.getCalories())) {
-                        // data[0][0] = "Good";
-                    } else {
-                        // data[0][0] = "Bad";
-                        text += "Calorie too much!";
-                        // resultLBDetail.setText("Calorie too much!");
-                        // System.out.println("Bad calorie");
-                        status2 = false;
-                    }
 
-                    if (MyFrame.person.isGoodFat(food.getFat())) {
-                        // data[0][1] = "Good";
-                    } else {
-                        // data[0][1] = "Bad";
-                        text += "Fat too much!";
-                        // resultLBDetail.setText("Fat too much!");
-                        // System.out.println("Bad fat");
-                        status2 = false;
-                    }
-
-                    if (MyFrame.person.isGoodSodium(food.getSodium())) {
-                        // data[0][2] = "Good";
-                    } else {
-                        // data[0][2] = "Bad";
-                        text += "Sodium too much!";
-                        // resultLBDetail.setText("Sodium too much!");
-                        // System.out.println("Bad sodium");
-                        status2 = false;
-                    }
-
-                    resultLBDetail.setText(text);
-                    if (status2) {
-                        resultLB.setText("Good");
-                    } else {
-                        resultLB.setText("Bad");
-                    }
-
-                    resultLB.setVisible(true);
-                    resultLBDetail.setVisible(true);
-                    // Thread.sleep(4000);
-                    repaint();
-
-                    // dispose();
-                    // paint(getGraphics()).dispose();
-                    // new MyFrame2();
+                    dispose();
+                    new MyFrame2();
 
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
@@ -207,6 +168,55 @@ public class MyFrame2 extends JFrame {
             }
         });
 
+    }
+
+    public void information() {
+        UIElements.text = "";
+        if (!MyFrame.person.isGoodCalorie(UIElements.food.getCalories())) {
+            UIElements.text += "Calorie too much!";
+            UIElements.status2 = false;
+        }
+
+        if (!MyFrame.person.isGoodFat(UIElements.food.getFat())) {
+            UIElements.text += "Fat too much!";
+            UIElements.status2 = false;
+        }
+
+        if (!MyFrame.person.isGoodSodium(UIElements.food.getSodium())) {
+            UIElements.text += "Sodium too much!";
+            UIElements.status2 = false;
+        }
+
+        resultLBDetail.setText(UIElements.text);
+        if (UIElements.status2) {
+            resultLB.setText("Good");
+        } else {
+            resultLB.setText("Bad");
+        }
+
+        data[0][0] = String.valueOf(UIElements.food.getCalories());
+        if (UIElements.food.getCalories() == -1) {
+            data[0][0] = "No Data";
+        }
+        data[0][1] = String.valueOf(UIElements.food.getFat());
+        if (UIElements.food.getFat() == -1) {
+            data[0][1] = "No Data";
+        }
+        data[0][2] = String.valueOf(UIElements.food.getSugar());
+        if (UIElements.food.getSugar() == -1) {
+            data[0][2] = "No Data";
+        }
+        data[0][3] = String.valueOf(UIElements.food.getProtein());
+        if (UIElements.food.getProtein() == -1) {
+            data[0][3] = "No Data";
+        }
+        data[0][4] = String.valueOf(UIElements.food.getSodium());
+        if (UIElements.food.getSodium() == -1) {
+            data[0][4] = "No Data";
+        }
+
+        resultLB.setVisible(true);
+        resultLBDetail.setVisible(true);
     }
 
     public String getConditionText() {
@@ -221,28 +231,14 @@ public class MyFrame2 extends JFrame {
         }
     }
 
-    public void fillList() {
-        personList.add(MyFrame.name);
-        personList.add(MyFrame.age);
-        personList.add(MyFrame.gender);
-        personList.add(MyFrame.weight);
-        personList.add(getConditionText());
-    }
-
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        picture = new ImageIcon(fileName.split(".")[0] + ".jpg").getImage();
-        g.drawImage(picture, 457, 0, 600, 500, null);
-        // dispose();
-        // picture = new ImageIcon(MyFrame2.fileName).getImage();
-        // g.drawImage(picture, 457, 0, 600, 500, null);
-        if (status2) {
-            g.drawImage(good, 1338, 100, 60, 60, null);
+        if (UIElements.status2) {
+            g.drawImage(good, 1338, 200, 60, 60, null);
         } else {
-            g.drawImage(bad, 1338, 100, 60, 60, null);
+            g.drawImage(bad, 1338, 200, 60, 60, null);
         }
     }
 
-    boolean status2 = true;
 }

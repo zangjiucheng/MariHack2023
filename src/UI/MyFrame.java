@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import main.Main;
 import main.Person;
-
+import UI.Utiles;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,7 +44,7 @@ public class MyFrame extends JFrame {
     boolean error2 = true;
 
     public MyFrame() {
-
+        this.getContentPane().setBackground(new java.awt.Color(0, 0, 0, 150));
         setTitle("Login");
         setSize(39 * Main.FULLSCREEN.width / 100, 69 * Main.FULLSCREEN.height / 100);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
