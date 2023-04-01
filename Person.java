@@ -15,26 +15,42 @@ class Person{
             if (condition[i]) {
                 switch (i) {
                     case 0:
+                        conditionName += "Staying healthy ";
+                        break;
+
+                    case 2:
                         conditionName += "Diabete ";
                         break;
 
                     case 1:
                         conditionName += "Obesity ";
                         break;
-
-                    case 2:
-                        conditionName += "Staying healthy ";
-                        break;
                 }
             }
         }
     }
 
-    public boolean isGoodCalorie() {
-        if () {
+    /* Food Attribute methods */
+    // public boolean isGoodCalorie() {
+    //     if () {
             
+    //     } else {
+            
+    //     }
+    // }
+
+    public static void main(String[] args) {
+        boolean[] b = {false, true, true};
+        Person p = new Person(5, "smthng", b);
+        System.out.println(p.getConditionName());
+        System.out.println(p.isGoodSodium(1400));
+    }
+
+    public boolean isGoodSodium(int sodiumIn_mg) {
+        if (conditionName.contains("Diabete")) {
+            return sodiumIn_mg <= 1500;
         } else {
-            
+            return sodiumIn_mg <= 2300;
         }
     }
 
@@ -60,5 +76,9 @@ class Person{
 
     public void setCondition(boolean[] condition) {
         this.condition = condition;
+    }
+
+    public String getConditionName() {
+        return conditionName;
     }
 }
