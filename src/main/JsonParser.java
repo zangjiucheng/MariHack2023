@@ -36,7 +36,7 @@ public class JsonParser {
     }
 
     public static Food_Attribute createFoodAttribute() {
-        String strJson = getJSONFromFile("src/main/data.json");
+        String strJson = getJSONFromFile("data.json");
         JSONObject json = new JSONObject(strJson);
         Food_Attribute food = new Food_Attribute(
                 Integer.parseInt(json.get("Calories").toString()),
