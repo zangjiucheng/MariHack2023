@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
 
+import main.Food_Attribute;
+import main.JsonParser;
 import main.RunPython;
 
 import java.awt.*;
@@ -135,6 +137,8 @@ public class MyFrame2 extends JFrame {
 
                     Desktop desktop = Desktop.getDesktop();
                     File picture = new File("img.jpg");
+                    Food_Attribute food = JsonParser.createFoodAttribute();
+
                     resultLB.setVisible(true);
                     repaint();
 

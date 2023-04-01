@@ -1,13 +1,14 @@
-package UI;
+// package UI;
 
-import java.awt.*;
+// import java.awt.*;
 
-public class Main {
+// public class Main {
 
-    public static final Dimension FULLSCREEN = Toolkit.getDefaultToolkit().getScreenSize();
+// public static final Dimension FULLSCREEN =
+// Toolkit.getDefaultToolkit().getScreenSize();
 
-    public static void main(String[] args) {
-        new MyFrame();
-        // new MyFrame2();
-    }
-}
+// public static void main(String[] args) {
+// new MyFrame();
+// // new MyFrame2();
+// }
+// }

@@ -32,7 +32,7 @@ public class MyFrame extends JFrame {
     public static String name = "";
     public static int age = 0;
     public static String gender = "";
-    public static float weight = 0;
+    public static int weight = 0;
     public static boolean[] condition = new boolean[3];
 
     public MyFrame() {
@@ -108,7 +108,7 @@ public class MyFrame extends JFrame {
                     dispose();
                     name = fNameTF.getText() + " " + lNameTF.getText();
                     age = Integer.parseInt(ageTF.getText());
-                    weight = Float.parseFloat(weightTF.getText());
+                    weight = Integer.parseInt(weightTF.getText());
                     gender = genderCB.getSelectedItem().toString();
 
                     if (conditionCB.getSelectedItem() == s1[1]) {
@@ -119,7 +119,9 @@ public class MyFrame extends JFrame {
                         condition[2] = true;
                     }
 
-                    Person person = new Person(age, name, condition);
+                    Person person = new Person(name, age, gender, weight, condition);
+
+                    System.out.println(person.getName());
 
                     new MyFrame2();
                 }
