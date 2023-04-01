@@ -35,6 +35,7 @@ public class MyFrame2 extends JFrame {
     JButton takePicBtn = new JButton("Take a picture");
     JButton selectPicBtn = new JButton("Select a picture");
     JLabel resultLB = new JLabel("Result");
+    JLabel resultLBDetail = new JLabel("");
     String[] titles = { "Calories", "Fat", "Sugar" };
     String[][] data = new String[1][3];
     JTable table = new JTable(data, titles);
@@ -69,6 +70,10 @@ public class MyFrame2 extends JFrame {
         resultLB.setBounds(1288, 0, 200, 50);
         resultLB.setVisible(false);
 
+        resultLBDetail.setFont(arial);
+        resultLBDetail.setBounds(1288, 30, 200, 120);
+        resultLBDetail.setVisible(false);
+
         nameLB2.setFont(arial);
         nameLB2.setBounds(20, 150, 200, 50);
         ageLB2.setFont(arial);
@@ -100,6 +105,7 @@ public class MyFrame2 extends JFrame {
         add(weightLB);
         add(conditionLB);
         add(resultLB);
+        add(resultLBDetail);
 
         add(nameLB2);
         add(ageLB2);
@@ -148,11 +154,14 @@ public class MyFrame2 extends JFrame {
                     System.out.println(food);
                     System.out.println(MyFrame.person);
                     // Boolean status2 = true;
+                    String text = "";
                     if (MyFrame.person.isGoodCalorie(food.getCalories())) {
                         // data[0][0] = "Good";
                     } else {
                         // data[0][0] = "Bad";
-                        System.out.println("Bad calorie");
+                        text += "Calorie too much!";
+                        // resultLBDetail.setText("Calorie too much!");
+                        // System.out.println("Bad calorie");
                         status2 = false;
                     }
 
@@ -160,7 +169,9 @@ public class MyFrame2 extends JFrame {
                         // data[0][1] = "Good";
                     } else {
                         // data[0][1] = "Bad";
-                        System.out.println("Bad fat");
+                        text += "Fat too much!";
+                        // resultLBDetail.setText("Fat too much!");
+                        // System.out.println("Bad fat");
                         status2 = false;
                     }
 
@@ -168,10 +179,13 @@ public class MyFrame2 extends JFrame {
                         // data[0][2] = "Good";
                     } else {
                         // data[0][2] = "Bad";
-                        System.out.println("Bad sodium");
+                        text += "Sodium too much!";
+                        // resultLBDetail.setText("Sodium too much!");
+                        // System.out.println("Bad sodium");
                         status2 = false;
                     }
 
+                    resultLBDetail.setText(text);
                     if (status2) {
                         resultLB.setText("Good");
                     } else {
@@ -179,6 +193,7 @@ public class MyFrame2 extends JFrame {
                     }
 
                     resultLB.setVisible(true);
+                    resultLBDetail.setVisible(true);
                     // Thread.sleep(4000);
                     repaint();
 

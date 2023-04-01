@@ -5,6 +5,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+ * 
+ * Main class to run the program
+ *
+ * @author Jiucheng
+ *
+ */
+
 public class RunPython {
     public static void executive(String stmt) throws IOException, InterruptedException {
         Runtime runtime = Runtime.getRuntime();
