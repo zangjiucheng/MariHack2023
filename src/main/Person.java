@@ -1,15 +1,21 @@
 package main;
 
+/**
+ *
+ * @author manas
+ */
+
 class Person {
     int age, weight;
-    String name, conditionName;
+    String name, conditionName, gender;
     boolean[] condition;
 
     // Constructor
-    public Person(int age, int weight, String name, boolean[] condition) {
+    public Person(int age, int weight, String name, String gender, boolean[] condition) {
         this.age = age;
         this.weight = weight;
         this.name = name;
+        this.gender = gender;
         this.condition = condition;
 
         /* Having a string with the name of the condition so we can use contains() in the food method later*/
@@ -46,12 +52,32 @@ class Person {
         } else if (conditionName.contains("Obesity")) {
             return calorieAmount <= 22 * weight;
         } else {
-            /////////////////////////////////////////////////////women/men ?
+            if (gender.contains("F")) {
+                return calorieAmount <= 2000;
+            } else {
+                return calorieAmount <= 2500;
+            }
         }
     }
 
     public int KgToPound(int weight) {
         return weight * 2.205;
+    }
+
+    public boolean isGoodFat(int fatIn_g) {
+        int calorieAmount;
+        if (conditionName.contains("Diabete")) {
+            calorieAmount = ((16 * KgToPound(weight)) / 3);
+            return fatIn_g * 9 <= calorieAmount * 0.35;
+        } else if (conditionName.contains("Obesity")) {
+            return fatIn_g <= weight;
+        } else {
+            if (gender.contains("F")) {
+                return fatIn_g <= 67;
+            } else {
+                return fatIn_g <= 83;
+            }
+        }
     }
 
     public static void main(String[] args) {
