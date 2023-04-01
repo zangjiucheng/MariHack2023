@@ -1,10 +1,12 @@
 import cv2
 import pytesseract
-from PIL import Image
-import re
+# from PIL import Image
+from re import search
+from json import dumps
+from os import system
 
-import json
 
+system('magick IMG_5256.HEIC img.jpg')
 
 img_cv = cv2.imread(r'img.jpg')
 
@@ -13,21 +15,25 @@ img_cv = cv2.imread(r'img.jpg')
 img_rgb = cv2.cvtColor(img_cv, cv2.COLOR_BGR2RGB)
 readData = pytesseract.image_to_string(img_cv)
 
-carlories = fat = sodium = 0
+calories = fat = sodium = -1
 
 
 lineData = readData.splitlines()
 for line in lineData:
     if 'Calories' in line or 'Calories' in line:
-        carlories = int(re.search(r'\d+', line).group())
+        calories = int(search(r'\d+', line).group())
         print(carlories)
     elif 'Fat' in line or 'Lipides' in line:
-        fat = int(re.search(r'\d+', line).group())
+        fat = int(search(r'\d+', line).group())
         print(fat)
     elif 'Sodium' in line or 'Sodium' in line:
-        sodium = int(re.search(r'\d+', line).group())
+        sodium = int(search(r'\d+', line).group())
         print(sodium)
+    elif 'Sugars' in line or 'Sucres' in line:
+        sugars = int(search(r'\d+', line).group())
+        print(sugars)
 
+# print(readData)
 # print(readData)
 # # OR
 # # img_rgb = Image.frombytes('RGB', img_cv.shape[:2], img_cv, 'raw', 'BGR', 0, 0)
@@ -44,12 +50,13 @@ for line in lineData:
 
 # a Python object (dict):
 x = {
-    "Calories": carlories,
+    "Calories": calories,
     "Fat": fat,
-    "Sodium": sodium
+    "Sodium": sodium,
+    "Sugars": sugars
 }
 
-jsonData = json.dumps(x)
+jsonData = dumps(x)
 
 with open('data.json', 'w+') as f:
     f.write(jsonData)
