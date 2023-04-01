@@ -86,9 +86,9 @@ public class Person {
     /* Food Attribute methods */
     public boolean isGoodCalorie(int calorieAmount) {
         if (conditionName.contains("Diabete_T1")) {
-            return calorieAmount <= (16 * KgToPound(weight)) / 3;
+            return calorieAmount <= (16 * KgToPound(weight)) / 6;
         } else if (conditionName.contains("Diabete_T2")) {
-            return calorieAmount <= 1800 / 3;
+            return calorieAmount <= 1800 / 6;
         } else if (conditionName.contains("Obesity")) {
             return calorieAmount <= 22 * weight;
         } else {

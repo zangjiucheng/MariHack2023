@@ -26,7 +26,7 @@ public class MyFrame extends JFrame {
     String s1[] = { "", "Staying Healthy", "Obesity", "Diabetes T1", "Diabetes T2" };
     String s2[] = { "", "M", "F" };
     // JComboBox conditionCB = new JComboBox(s1);
-    JRadioButton button1 = new JRadioButton("Diabetes type 2");
+    JRadioButton button1 = new JRadioButton("Diabetes type 1");
     JRadioButton button2 = new JRadioButton("Obesity");
     JRadioButton button3 = new JRadioButton("Staying Healthy");
 
@@ -142,13 +142,13 @@ public class MyFrame extends JFrame {
                         gender = genderCB.getSelectedItem().toString();
 
                         if (button1.isSelected()) {
-                            condition[0] = true;
+                            condition[3] = true;
                         }
                         if (button2.isSelected()) {
                             condition[1] = true;
                         }
                         if (button3.isSelected()) {
-                            condition[2] = true;
+                            condition[0] = true;
                         }
 
                         person = new Person(name, age, gender, weight, condition);

@@ -145,6 +145,8 @@ public class MyFrame2 extends JFrame {
                     // Desktop desktop = Desktop.getDesktop();
                     // File picture = new File(fileName);
                     Food_Attribute food = JsonParser.createFoodAttribute();
+                    System.out.println(food);
+                    System.out.println(MyFrame.person);
                     // Boolean status2 = true;
                     if (MyFrame.person.isGoodCalorie(food.getCalories())) {
                         // data[0][0] = "Good";
