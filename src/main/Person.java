@@ -21,12 +21,12 @@ class Person {
                         conditionName += "Staying healthy ";
                         break;
 
-                    case 2:
-                        conditionName += "Diabete_T1 ";
-                        break;
-
                     case 1:
                         conditionName += "Obesity ";
+                        break;
+
+                    case 2:
+                        conditionName += "Diabete_T1 ";
                         break;
                     
                     case 3:
@@ -40,7 +40,7 @@ class Person {
     /* Food Attribute methods */
     public boolean isGoodCalorie(int calorieAmount) {
         if (conditionName.contains("Diabete_T1")) {
-            return calorieAmount <= (KgToPound(weight)) / 3;
+            return calorieAmount <= (16 * KgToPound(weight)) / 3;
         } else if (conditionName.contains("Diabete_T2")){
             return calorieAmount <= 1800 / 3;
         } else if (conditionName.contains("Obesity")) {
