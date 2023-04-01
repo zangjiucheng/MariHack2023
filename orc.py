@@ -38,7 +38,7 @@ def readImage():
     # img_cv = cvtColor(img_cv, COLOR_BGR2RGB)
     readData = pytesseract.image_to_string(img_cv, lang='eng')
 
-    calories = fat = sodium = sugars = -1
+    calories = fat = sodium = sugars = Protein = -1
 
     lineData = readData.splitlines()
     for line in lineData:
@@ -69,12 +69,18 @@ def readImage():
                 sugars = int(search(r'\d+', line).group())
             except:
                 pass
+        elif 'Protein' in line or 'Proteines' in line:
+            try:
+                Protein = int(search(r'\d+', line).group())
+            except:
+                pass
 
     dictFood = {
         "Calories": calories,
         "Fat": fat,
         "Sodium": sodium,
-        "Sugars": sugars
+        "Sugars": sugars,
+        "Protein": Protein
     }
     return dictFood
 
