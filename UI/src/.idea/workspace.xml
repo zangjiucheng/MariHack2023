@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="119f842b-071d-40e1-a2e6-96d70881087f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Bad.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Good.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../NutriScan Logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyFrame2.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyFrame2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MyPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/MyPanel.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2NpiHhhWrpJpOWMObUewHqXx8U3" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/gabsa/OneDrive/Bureau/Microwaved Robots/MariHack2023/src/UI/src"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="119f842b-071d-40e1-a2e6-96d70881087f" name="Changes" comment="" />
+      <created>1680367337243</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1680367337243</updated>
+    </task>
+    <servers />
+  </component>
+</project>

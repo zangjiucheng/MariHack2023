@@ -11,6 +11,6 @@ public class MyPanel extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        g.drawImage(logo,-70,0,465,65*Main.FULLSCREEN.height/100, null);
+        g.drawImage(logo,-70,0,470,65*Main.FULLSCREEN.height/100, null);
     }
 }

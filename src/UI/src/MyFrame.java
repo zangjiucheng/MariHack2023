@@ -30,6 +30,8 @@ public class MyFrame extends JFrame {
     public static String gender = "";
     public static float weight = 0;
     public static boolean[] condition = new boolean[4];
+    boolean error = true;
+    boolean error2 = true;
 
 
     public MyFrame() {
@@ -97,32 +99,51 @@ public class MyFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if (fNameTF.getText().equals("") && lNameTF.getText().equals("") && ageTF.getText().equals("") &&
-                        genderCB.getSelectedItem().toString() == "" && weightTF.getText().equals("") &&
-                        conditionCB.getSelectedItem().toString() == "") {
-
-                    JOptionPane.showMessageDialog(null, "Please enter all the required information");
-
-                }else {
-
-                    dispose();
-                    name = fNameTF.getText() + " " + lNameTF.getText();
-                    age = Integer.parseInt(ageTF.getText());
-                    weight = Float.parseFloat(weightTF.getText());
-                    gender = genderCB.getSelectedItem().toString();
-
-                    if (conditionCB.getSelectedItem() == s1[1]){
-                        condition[0] = true;
-                    }else if (conditionCB.getSelectedItem() == s1[2]) {
-                        condition[1] = true;
-                    }else if (conditionCB.getSelectedItem() == s1[3]) {
-                        condition[2] = true;
-                    }else {
-                        condition[3] = true;
-                    }
-
-                    new MyFrame2();
+                try{
+                    Integer.valueOf(ageTF.getText());
+                    error = false;
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Please enter a number for age");
                 }
+
+                try{
+                    Float.valueOf(weightTF.getText());
+                    error2 = false;
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Please enter a number for weight");
+                }
+
+                if (!error && !error2) {
+
+                    if (fNameTF.getText().equals("") && lNameTF.getText().equals("") && ageTF.getText().equals("") &&
+                            genderCB.getSelectedItem().toString().equals("") && weightTF.getText().equals("") &&
+                            conditionCB.getSelectedItem().equals("")) {
+
+                        JOptionPane.showMessageDialog(null, "Please enter all the required information");
+
+                    }else {
+
+                        dispose();
+                        name = fNameTF.getText() + " " + lNameTF.getText();
+                        age = Integer.parseInt(ageTF.getText());
+                        weight = Float.parseFloat(weightTF.getText());
+                        gender = genderCB.getSelectedItem().toString();
+
+                        if (conditionCB.getSelectedItem() == s1[1]){
+                            condition[0] = true;
+                        }else if (conditionCB.getSelectedItem() == s1[2]) {
+                            condition[1] = true;
+                        }else if (conditionCB.getSelectedItem() == s1[3]) {
+                            condition[2] = true;
+                        }else {
+                            condition[3] = true;
+                        }
+
+                        new MyFrame2();
+                    }
+                }
+
+
             }
         });
 
