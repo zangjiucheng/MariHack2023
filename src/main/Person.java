@@ -1,4 +1,6 @@
-class Person{
+package main;
+
+class Person {
     int age;
     String name, conditionName;
     boolean[] condition;

@@ -1,18 +1,26 @@
+package main;
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+/**
+ *
+ * @author Zeyu
+ * 
+ */
 public class Food_Attribute {
-    protected int calories, fat, sodium, sugar;
 
-    /* Constructor */
-    public Food_Attribute() {
-    }
+    protected int calories, fat, sodium, sugar, protein;
 
-    public Food_Attribute(int calories, int fat, int sodium, int sugar) {
+    public Food_Attribute(int calories, int fat, int sodium, int sugar, int protein) {
         this.calories = calories;
         this.fat = fat;
         this.sodium = sodium;
         this.sugar = sugar;
+        this.protein = protein;
     }
 
-    /* Getter setters */
     public int getCalories() {
         return this.calories;
     }
@@ -45,6 +53,34 @@ public class Food_Attribute {
         this.sugar = sugar;
     }
 
+    public int getProtein() {
+        return this.protein;
+    }
+
+    public void setProtein(int protein) {
+        this.protein = protein;
+    }
+
+    public Food_Attribute fat(int fat) {
+        setFat(fat);
+        return this;
+    }
+
+    public Food_Attribute sodium(int sodium) {
+        setSodium(sodium);
+        return this;
+    }
+
+    public Food_Attribute sugar(int sugar) {
+        setSugar(sugar);
+        return this;
+    }
+
+    public Food_Attribute protein(int protein) {
+        setProtein(protein);
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this)
@@ -54,7 +90,7 @@ public class Food_Attribute {
         }
         Food_Attribute food_Attribute = (Food_Attribute) o;
         return calories == food_Attribute.calories && fat == food_Attribute.fat && sodium == food_Attribute.sodium
-                && sugar == food_Attribute.sugar;
+                && sugar == food_Attribute.sugar && protein == food_Attribute.protein;
     }
 
     @Override
@@ -64,6 +100,7 @@ public class Food_Attribute {
                 ", fat='" + getFat() + "'" +
                 ", sodium='" + getSodium() + "'" +
                 ", sugar='" + getSugar() + "'" +
+                ", protein='" + getProtein() + "'" +
                 "}";
     }
 
