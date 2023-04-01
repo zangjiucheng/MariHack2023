@@ -13,7 +13,7 @@ import java.util.Scanner;
  *
  * @author manas
  */
-class JsonParser {
+class Food_Attribute {
 
     public static String getJSONFromFile(String filename) {
         String jsonText = "";
@@ -69,7 +69,7 @@ class JsonParser {
 
 }
 Food_Attribute
-class JsonParser {
+class Food_Attribute {
 
     protected int calories, fat, sodium, sugar;
 
@@ -117,10 +117,10 @@ class JsonParser {
         return calories == food_Attribute.calories && fat == food_Attribute.fat && sodium == food_Attribute.sodium && sugar == food_Attribute.sugar;
     }
 
-    public JsonParser() {
+    public Food_Attribute() {
     }
 
-    public JsonParser(int calories, int fat, int sodium, int sugar) {
+    public Food_Attribute(int calories, int fat, int sodium, int sugar) {
         this.calories = calories;
         this.fat = fat;
         this.sodium = sodium;
