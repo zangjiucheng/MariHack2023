@@ -2,13 +2,11 @@ package UI;
 
 import javax.swing.*;
 
-import main.Main;
-
 import java.awt.*;
 
 public class MyPanel2 extends JPanel {
     public MyPanel2() {
-        this.setPreferredSize(Main.FULLSCREEN);
+        this.setPreferredSize(MyFrame.FULLSCREEN);
         this.setBackground(Color.WHITE);
     }
 

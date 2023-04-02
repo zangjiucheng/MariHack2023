@@ -1,4 +1,3 @@
-package main;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -15,7 +14,6 @@ import UI.MyFrame;
  */
 
 public class Main {
-    public static final Dimension FULLSCREEN = Toolkit.getDefaultToolkit().getScreenSize();
 
     public static void main(String args[]) {
         try {

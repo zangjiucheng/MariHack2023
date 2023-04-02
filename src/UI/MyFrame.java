@@ -2,7 +2,6 @@ package UI;
 
 import javax.swing.*;
 
-import main.Main;
 import main.Person;
 import UI.Utiles;
 import java.awt.*;
@@ -42,11 +41,12 @@ public class MyFrame extends JFrame {
     public static boolean[] condition = new boolean[4];
     boolean error = true;
     boolean error2 = true;
+    public static final Dimension FULLSCREEN = Toolkit.getDefaultToolkit().getScreenSize();
 
     public MyFrame() {
         this.getContentPane().setBackground(new java.awt.Color(0, 0, 0, 150));
         setTitle("Login");
-        setSize(39 * Main.FULLSCREEN.width / 100, 69 * Main.FULLSCREEN.height / 100);
+        setSize(39 * FULLSCREEN.width / 100, 69 * FULLSCREEN.height / 100);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
