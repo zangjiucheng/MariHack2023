@@ -18,6 +18,7 @@ public class Main {
     public static void main(String args[]) {
         try {
             new File("img.jpg").delete();
+            new File("data.json").delete();
         } catch (Exception exception) {
         }
         new MyFrame();
