@@ -5,23 +5,26 @@ import java.awt.Toolkit;
 import java.io.File;
 
 import org.example.UI.MyFrame;
+import org.example.UI.MyFrame2;
 
 /**
  * 
  * Main class to run the program
  * 
- * @author Jiucheng
- * 
+ * @authors Jiucheng, Gabriel
+ *
  */
 
 public class Main {
 
     public static void main(String args[]) {
+
         try {
             new File("img.jpg").delete();
-            new File("data.json").delete();
-        } catch (Exception exception) {
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
+
         new MyFrame();
     }
 }
